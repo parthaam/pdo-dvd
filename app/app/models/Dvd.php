@@ -6,7 +6,41 @@
  * Time: 5:57 PM
  */
 
-class Dvd {
+class Dvd extends Eloquent {
+
+  public function genre() {
+    return $this->belongsTo('genre');
+  }
+
+  public function format() {
+    return $this->belongsTo('Rating');
+  }
+
+  public function label() {
+    return $this->belongsTo('label');
+  }
+
+  public function rating() {
+    return $this->belongsTo('rating');
+  }
+
+  public function sound() {
+    return $this->belongsTo('sound');
+  }
+
+  public static function validate($title, $ratingId, $genreId)
+  {
+    $validation = Validator::make([
+      'title' => $title,
+      'ratings' => $ratingId,
+      'genres' => $genreId
+    ], [
+    'title' => 'required|min:3',
+    'ratings' => 'required|numeric',
+    'genres' => 'required|numeric'
+    ]);
+    return $validation;
+  }
 
   public static function search($title, $ratingId, $genreId) {
     $query = DB::table('dvds')
@@ -15,7 +49,8 @@ class Dvd {
       ->join('labels', 'labels.id', '=', 'dvds.label_id')
       ->join('genres', 'genres.id', '=', 'dvds.genre_id')
       ->join('sounds', 'sounds.id', '=', 'dvds.sound_id')
-      ->join('formats', 'formats.id', '=', 'dvds.format_id');
+      ->join('formats', 'formats.id', '=', 'dvds.format_id')
+      ->take(30);
 
       if ($title) {
          $query->where('title', 'LIKE', "%$title%");
@@ -33,4 +68,4 @@ class Dvd {
 
     return $dvds;
   }
-} 
+}
