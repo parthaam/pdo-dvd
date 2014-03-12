@@ -4,7 +4,7 @@ class DvdController extends BaseController {
 	
 	public function search() {
 
-		$genreQuery = DB::table('genres')->select('id', 'genre_name');
+		  $genreQuery = DB::table('genres')->select('id', 'genre_name');
     	$genres = $genreQuery->get();
 
     	$ratingQuery = DB::table('ratings')->select('id', 'rating_name');
@@ -85,6 +85,7 @@ class DvdController extends BaseController {
 
   function getFacebookIds() {
     $username = Input::get('username');
+    // This code is also in the FacebookApi.php class but I had trouble including it.
     $endpoint = 'https://graph.facebook.com/' . $username;
     $json = file_get_contents($endpoint);
     $decode = json_decode($json, true);

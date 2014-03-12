@@ -24,9 +24,12 @@ Route::get('/', function()
 // 	return View::make('dvd');
 // }
 
-Route::get('/dvd/search', 'DvdController@search');
-Route::get('/dvds', 'DvdController@listDvds');
-Route::get('/dvd/create', 'DvdController@createDvd');
-Route::post('/dvd/insert-dvd', 'DvdController@insertDvd');
-Route::get('/search', 'DvdController@searchFB');
-Route::get('/get-facebook-ids', 'DvdController@getFacebookIds');
+// Route::get('/dvd/search', 'DvdController@search');
+// Route::get('/dvds', 'DvdController@listDvds');
+// Route::get('/dvd/create', 'DvdController@createDvd');
+// Route::post('/dvd/insert-dvd', 'DvdController@insertDvd');
+// Route::get('/search', 'DvdController@searchFB');
+// Route::get('/get-facebook-ids', 'DvdController@getFacebookIds');
+
+Route::get('/', 'YelpController@search');
+Route::get('/restaurants/{id}/reviews', 'YelpController@reviews');

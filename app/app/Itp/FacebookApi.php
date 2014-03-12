@@ -1,11 +1,15 @@
 <?php
 
-namespace Itp;
+namespace Itp\FacebookApi;
 
 class FacebookApi {
-	
-	public static function getResults($name) {
-		$endpoint = 'graph.facebook.com/'. $name;
+	protected $id;
+
+	function __construct($id_) {
+		$this->id = $id_;
+	}
+	public static function get() {
+		$endpoint = 'graph.facebook.com/'. $id;
     	$json = file_get_contents($endpoint);
     	return json_decode($json);
 	}
